@@ -1,6 +1,6 @@
 # CS6910-Assignment-1
 ## Deep learning assignment 1
-[Link to wandb report](https://wandb.ai/cs22s015/CS6910_Assignment_1/reports/-CS6910-Assignment-1--VmlldzozNTk4NDkx)
+[Link to wandb report](https://api.wandb.ai/links/cs22s015/9q5djici)
 In this assignment we need to perform classification task on fashion mnist dataset.
 * ```Load_data()``` **function:**
  This takes string as an argument which specify the name of the dataset.It loads that dataset , do preprocessing steps which includes splitting of dataset into train and validation, normalization and <b>one hot encoding</b> for labels.It plot the first images in each class and  returns the list consisting of class names and preprocessed data.
