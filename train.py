@@ -232,6 +232,11 @@ class NN:
       return (np.exp(-x))/((np.exp(-x)+1)**2)
     return 1/(1 + np.exp(-x))
 
+  def identity(self, x, derivative=False):
+    if derivative:
+      return 1
+    return x
+
   def tan_h(self, x, derivative=False):
     t=np.tanh(x)
     if derivative:
@@ -276,9 +281,12 @@ class NN:
         h['h'+str(i)]=self.tan_h(a['a'+str(i)])
       elif self.activation_func=='sigmoid':
         h['h'+str(i)]=self.sigmoid(a['a'+str(i)])
-      if self.activation_func=='relu':
+      elif self.activation_func=='relu':
         h['h'+str(i)]=self.relu(a['a'+str(i)])
-       
+      elif self.activation_func=='identity':
+        h['h'+str(i)]=self.identity(a['a'+str(i)])
+
+
     a['a'+str(L-1)]= params['W'+str(L-1)] @ (h['h'+str(L-2)]) +params['b'+str(L-1)]
     y_prob=[]
     for i in range(len(a['a'+str(L-1)][0])):
@@ -320,6 +328,9 @@ class NN:
           delta_params['a' + str(i-1)] = delta_params['h' + str(i-1)] * self.sigmoid(a['a' + str(i-1)], derivative=True)  
         elif self.activation_func=='relu':
           delta_params['a' + str(i-1)] = delta_params['h' + str(i-1)] * self.relu(a['a' + str(i-1)], derivative=True)  
+        elif self.activation_func=='identity':
+          delta_params['a' + str(i-1)] = delta_params['h' + str(i-1)] * self.identity(a['a' + str(i-1)], derivative=True)  
+
 
     return delta_params
   
